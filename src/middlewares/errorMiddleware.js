@@ -1,7 +1,3 @@
-/**
- * Middleware de manejo de errores para Express
- * Debe tener 4 parámetros: (err, req, res, next)
- */
 const errorHandler = (err, req, res, next) => {
   // Determinar el código de estado HTTP
   const statusCode = err.statusCode || err.status || 500;

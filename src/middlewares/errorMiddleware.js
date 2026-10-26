@@ -1,9 +1,30 @@
 const errorHandler = (err, req, res, next) => {
   // Determinar el código de estado HTTP
-  const statusCode = err.statusCode || err.status || 500;
+  let statusCode = err.statusCode || err.status || 500;
 
   // Determinar el mensaje de error
-  const message = err.message || 'Error interno del servidor';
+  let message = err.message || 'Error interno del servidor';
+
+  // Traducir errores comunes de Mongoose a respuestas HTTP claras
+  if (err.name === 'ValidationError') {
+    statusCode = 400;
+    message = Object.values(err.errors)
+      .map((item) => item.message)
+      .join('. ');
+  }
+
+  if (err.name === 'CastError') {
+    statusCode = 400;
+    message = `Valor inválido para el campo ${err.path}`;
+  }
+
+  if (err.code === 11000) {
+    statusCode = 409;
+    const field = Object.keys(err.keyValue || {}).join(', ');
+    message = field
+      ? `Ya existe un registro con ese valor en el campo ${field}`
+      : 'Ya existe un registro con esos datos';
+  }
 
   // En desarrollo, incluir el stack trace para depuración
   const response = {

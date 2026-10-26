@@ -12,6 +12,11 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // ============================================
+// RUTAS DE AUTENTICACIÓN (públicas)
+// ============================================
+app.use('/api/auth', require('./routes/authRoutes'));
+
+// ============================================
 // RUTAS DE USUARIO (Arquitectura en capas)
 // ============================================
 app.use('/api/users', require('./routes/userRoutes'));

@@ -22,6 +22,18 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 
 // ============================================
+// RUTAS DEL CATÁLOGO DE LIBROS (Arquitectura en capas)
+// ============================================
+app.use('/api/books', require('./routes/bookRoutes'));
+
+// ============================================
+// RUTAS TRANSACCIONALES DE PRÉSTAMOS
+// Protegidas con authMiddleware dentro de transactionRoutes
+// ============================================
+app.use('/api/transactions', require('./routes/transactionRoutes'));
+
+
+// ============================================
 // RUTAS DE PRUEBA PARA MANEJO DE ERRORES
 // ============================================
 

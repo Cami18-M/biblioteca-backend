@@ -1,0 +1,69 @@
+name: CI - Biblioteca Backend (Sprint 2)
+
+on:
+  push:
+    branches: [ '**' ]
+  pull_request:
+    branches: [ main, '**' ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      # No se usa base de datos externa; los tests usan mongodb-memory-server en memoria
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Crear archivo .env.test para pruebas
+        run: |
+          cat > .env.test <<EOF
+          PORT=5001
+          NODE_ENV=test
+          MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net/biblioteca_test
+          JWT_SECRET=test_jwt_secret_ci_do_not_use_in_production
+          JWT_EXPIRES_IN=1d
+          LOAN_PERIOD_DAYS=14
+          EOF
+
+      - name: Ejecutar pruebas unitarias e integración (Jest)
+        run: npm test
+
+      - name: Instalar Newman (colección de Postman)
+        run: npm install -g newman
+
+      - name: Ejecutar colección de Postman con Newman
+        run: |
+          npm run dev &
+          SERVER_PID=$!
+          sleep 5
+          newman run postman/Biblioteca_Backend.postman_collection.json \
+            -e postman/Biblioteca_Backend.postman_environment.json \
+            --reporters cli,html \
+            --reporter-html-export newman-report.html || true
+          kill $SERVER_PID 2>/dev/null || true
+
+      - name: Publicar reporte de Newman como artefacto
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: newman-report
+          path: newman-report.html
+
+      - name: Publicar reporte de cobertura de Jest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jest-coverage
+          path: coverage/

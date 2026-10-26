@@ -1,0 +1,441 @@
+{
+  "info": {
+    "name": "Biblioteca Backend - Sprint 2",
+    "description": "Colección de pruebas automatizadas para el módulo de Usuarios, Autenticación, Libros y Préstamos. Ejecutar con Newman o Postman Runner contra http://localhost:5000",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:5000", "type": "string" },
+    { "key": "token", "value": "", "type": "string" },
+    { "key": "userId", "value": "", "type": "string" },
+    { "key": "bookId", "value": "", "type": "string" },
+    { "key": "transactionId", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "POST /api/auth/register",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Usuario Postman\",\n  \"email\": \"postman@example.com\",\n  \"password\": \"Password123\"\n}"
+            },
+            "url": "{{base_url}}/api/auth/register"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Cuerpo tiene success true', function () { pm.expect(pm.response.json().success).to.eql(true); });",
+                  "pm.test('Usuario tiene _id', function () { pm.expect(pm.response.json().data).to.have.property('_id'); });",
+                  "pm.test('Guardar userId como variable', function () { pm.environment.set('userId', pm.response.json().data._id); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /api/auth/login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"postman@example.com\",\n  \"password\": \"Password123\"\n}"
+            },
+            "url": "{{base_url}}/api/auth/login"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Respuesta tiene token', function () { pm.expect(pm.response.json().data).to.have.property('token'); });",
+                  "pm.test('Guardar token como variable', function () { pm.environment.set('token', pm.response.json().data.token); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /api/auth/me (protegido)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{base_url}}/api/auth/me"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Perfil tiene email', function () { pm.expect(pm.response.json().data).to.have.property('email'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /api/auth/me sin token (debe fallar 401)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/api/auth/me"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 401 sin token', function () { pm.response.to.have.status(401); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Usuarios",
+      "item": [
+        {
+          "name": "POST /api/users",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Usuario Ruta\",\n  \"email\": \"ruta@example.com\",\n  \"password\": \"RutaPass123\"\n}"
+            },
+            "url": "{{base_url}}/api/users"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Usuario creado tiene _id', function () { pm.expect(pm.response.json().data).to.have.property('_id'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /api/users",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/api/users"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Datos es un array', function () { pm.expect(pm.response.json().data).to.be.an('array'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /api/users/:id",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/api/users/{{userId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Email coincide', function () { pm.expect(pm.response.json().data.email).to.eql('postman@example.com'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "PUT /api/users/:id",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Nombre Actualizado\"\n}"
+            },
+            "url": "{{base_url}}/api/users/{{userId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Nombre actualizado', function () { pm.expect(pm.response.json().data.name).to.eql('Nombre Actualizado'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "DELETE /api/users/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/api/users/{{userId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Mensaje de éxito', function () { pm.expect(pm.response.body).to.include('eliminado'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Libros",
+      "item": [
+        {
+          "name": "POST /api/books",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Libro Postman\",\n  \"author\": \"Autor Postman\",\n  \"isbn\": \"978-0000000001\",\n  \"publishedYear\": 2020,\n  \"stock\": 5,\n  \"category\": \"Pruebas\"\n}"
+            },
+            "url": "{{base_url}}/api/books"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Libro tiene _id', function () { pm.expect(pm.response.json().data).to.have.property('_id'); });",
+                  "pm.test('Guardar bookId', function () { pm.environment.set('bookId', pm.response.json().data._id); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /api/books",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/api/books"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Datos es array', function () { pm.expect(pm.response.json().data).to.be.an('array'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /api/books/:id",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/api/books/{{bookId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Título coincide', function () { pm.expect(pm.response.json().data.title).to.eql('Libro Postman'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "DELETE /api/books/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/api/books/{{bookId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 200', function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Préstamos (Transacciones)",
+      "item": [
+        {
+          "name": "POST /api/transactions",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"book\": \"{{bookId}}\"\n}"
+            },
+            "url": "{{base_url}}/api/transactions"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Préstamo tiene _id', function () { pm.expect(pm.response.json().data).to.have.property('_id'); });",
+                  "pm.test('Estado es active', function () { pm.expect(pm.response.json().data.status).to.eql('active'); });",
+                  "pm.test('Guardar transactionId', function () { pm.environment.set('transactionId', pm.response.json().data._id); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /api/transactions",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{base_url}}/api/transactions"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Datos es array', function () { pm.expect(pm.response.json().data).to.be.an('array'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /api/transactions/me",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{base_url}}/api/transactions/me"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Tiene al menos un préstamo', function () { pm.expect(pm.response.json().data.length).to.be.above(0); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /api/transactions/:id",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{base_url}}/api/transactions/{{transactionId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 200', function () { pm.response.to.have.status(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "PATCH /api/transactions/:id/return",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{base_url}}/api/transactions/{{transactionId}}/return"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Estado es returned', function () { pm.expect(pm.response.json().data.status).to.eql('returned'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

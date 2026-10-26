@@ -12,6 +12,11 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // ============================================
+// RUTAS DE USUARIO (Arquitectura en capas)
+// ============================================
+app.use('/api/users', require('./routes/userRoutes'));
+
+// ============================================
 // RUTAS DE PRUEBA PARA MANEJO DE ERRORES
 // ============================================
 

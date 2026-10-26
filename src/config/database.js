@@ -10,7 +10,12 @@ const connectDB = async () => {
         console.log('MongoDB conectado exitosamente a Atlas');
     } catch (error) {
         console.error('Error al conectar a MongoDB Atlas:', error.message);
-        process.exit(1);
+        // En desarrollo, no exitamos para poder probar las rutas de Express
+        if (process.env.NODE_ENV !== 'production') {
+            console.log('Continuando sin conexión a MongoDB (modo desarrollo)');
+        } else {
+            process.exit(1);
+        }
     }
 };
 

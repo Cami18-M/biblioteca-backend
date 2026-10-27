@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.5">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Biblioteca Backend - Pruebas de Rendimiento" enabled="true">
       <stringProp name="TestPlan.comments">Pruebas de carga con Apache JMeter para el backend de Biblioteca.</stringProp>
@@ -33,10 +33,19 @@
         <stringProp name="ThreadGroup.same_user_on_next_iteration">true</stringProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPRequest guiclass="HttpTestSampleGui" testclass="HTTPRequest" testname="GET /api/books" enabled="true">
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Cabeceras Globales" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        <HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="GET /api/books" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true"/>
-          <stringProp name="HTTPSampler.domain">${__P(BASE_URL,localhost:5000)}</stringProp>
-          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">5000</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/api/books</stringProp>
@@ -48,7 +57,7 @@
           <boolProp name="HTTPSampler.REDIRECT_AUTO">false</boolProp>
           <boolProp name="HTTPSampler.USE_BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
           <boolProp name="HTTPSampler.do_multipart_post">false</boolProp>
-        </HTTPRequest>
+        </HTTPSampler>
         <hashTree>
           <ResponseAssertion guiclass="AssertionGui" testclass="Assertion" testname="Assertion status 200 - GET /api/books" enabled="true">
             <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -63,55 +72,6 @@
           <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duración máxima 1000ms" enabled="true">
             <stringProp name="DurationAssertion.duration">1000</stringProp>
           </DurationAssertion>
-          <hashTree/>
-        </hashTree>
-        <HTTPRequest guiclass="HttpTestSampleGui" testclass="HTTPRequest" testname="POST /api/auth/register" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="HTTPArgumentsPanel">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.name">name</stringProp>
-                <stringProp name="Argument.value">Usuario JMeter</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.name">email</stringProp>
-                <stringProp name="Argument.value">jmeter_${__RandomString(8,)}@example.com</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.name">password</stringProp>
-                <stringProp name="Argument.value">Password123</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">${__P(BASE_URL,localhost:5000)}</stringProp>
-          <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-          <stringProp name="HTTPSampler.path">/api/auth/register</stringProp>
-          <stringProp name="HTTPSampler.method">POST</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DATA_MULTIPART_MODE">false</boolProp>
-          <boolProp name="HTTPSampler.REDIRECT_AUTO">false</boolProp>
-          <boolProp name="HTTPSampler.USE_BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
-          <boolProp name="HTTPSampler.do_multipart_post">false</boolProp>
-        </HTTPRequest>
-        <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="Assertion" testname="Assertion status 201 - Register" enabled="true">
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-            <boolProp name="Assertion.check_response_code">true</boolProp>
-            <boolProp name="Assertion.ignore_case">false</boolProp>
-            <stringProp name="Assertion.test_type">1</stringProp>
-            <collectionProp name="Asserion.test_strings">
-              <stringProp name="201">201</stringProp>
-            </collectionProp>
-          </ResponseAssertion>
           <hashTree/>
         </hashTree>
       </hashTree>
@@ -130,22 +90,6 @@
             <threadName>true</threadName>
             <dataType>true</dataType>
             <encoding>false</encoding>
-            <assertions>true</assertions>
-            <subresults>false</subresults>
-            <responseData>false</responseData>
-            <samplerData>false</samplerData>
-            <responseHeaders>false</responseHeaders>
-            <requestHeaders>false</requestHeaders>
-            <responseDataOnError>false</responseDataOnError>
-            <saveAssertionResultsFirst>true</saveAssertionResultsFirst>
-            <assertionResultsToSave>0</assertionResultsToSave>
-            <bytes>true</bytes>
-            <threadCounts>true</threadCounts>
-            <samplerDataOnError>false</samplerDataOnError>
-            <assertionCount>true</assertionCount>
-            <hostName>true</hostName>
-            <protoHost>true</protoHost>
-            <threadGroup>true</threadGroup>
           </value>
         </objProp>
         <stringProp name="filename"></stringProp>

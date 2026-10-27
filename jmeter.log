@@ -1,0 +1,31 @@
+2026-10-26 22:41:04,782 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2026-10-26 22:41:04,803 INFO o.a.j.JMeter: Loading user properties from: C:\Users\camil\Downloads\apache-jmeter-5.6.3\apache-jmeter-5.6.3\bin\user.properties
+2026-10-26 22:41:04,803 INFO o.a.j.JMeter: Loading system properties from: C:\Users\camil\Downloads\apache-jmeter-5.6.3\apache-jmeter-5.6.3\bin\system.properties
+2026-10-26 22:41:04,818 INFO o.a.j.JMeter: Copyright (c) 1998-2024 The Apache Software Foundation
+2026-10-26 22:41:04,818 INFO o.a.j.JMeter: Version 5.6.3
+2026-10-26 22:41:04,818 INFO o.a.j.JMeter: java.version=1.8.0_401
+2026-10-26 22:41:04,818 INFO o.a.j.JMeter: java.vm.name=Java HotSpot(TM) 64-Bit Server VM
+2026-10-26 22:41:04,818 INFO o.a.j.JMeter: os.name=Windows 11
+2026-10-26 22:41:04,818 INFO o.a.j.JMeter: os.arch=amd64
+2026-10-26 22:41:04,818 INFO o.a.j.JMeter: os.version=10.0
+2026-10-26 22:41:04,818 INFO o.a.j.JMeter: file.encoding=Cp1252
+2026-10-26 22:41:04,818 INFO o.a.j.JMeter: java.awt.headless=true
+2026-10-26 22:41:04,818 INFO o.a.j.JMeter: Max memory     =1073741824
+2026-10-26 22:41:04,818 INFO o.a.j.JMeter: Available Processors =12
+2026-10-26 22:41:04,830 INFO o.a.j.JMeter: Default Locale=English (EN)
+2026-10-26 22:41:04,830 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2026-10-26 22:41:04,830 INFO o.a.j.JMeter: JMeterHome=C:\Users\camil\Downloads\apache-jmeter-5.6.3\apache-jmeter-5.6.3
+2026-10-26 22:41:04,830 INFO o.a.j.JMeter: user.dir  =C:\Users\camil\OneDrive\Documentos\Escritorio\Biblioteca_Backend
+2026-10-26 22:41:04,830 INFO o.a.j.JMeter: PWD       =C:\Users\camil\OneDrive\Documentos\Escritorio\Biblioteca_Backend
+2026-10-26 22:41:04,830 INFO o.a.j.JMeter: IP: 192.168.1.11 Name: Andrea FullName: Andrea
+2026-10-26 22:41:04,863 ERROR o.a.j.JMeter: An error occurred: 
+java.lang.IllegalArgumentException: Cannot write to 'C:\Users\camil\OneDrive\Documentos\Escritorio\Biblioteca_Backend\reporte-html' as folder is not empty
+	at org.apache.jorphan.util.JOrphanUtils.canSafelyWriteToFolder(JOrphanUtils.java:664) ~[jorphan.jar:5.6.3]
+	at org.apache.jorphan.util.JOrphanUtils.canSafelyWriteToFolder(JOrphanUtils.java:620) ~[jorphan.jar:5.6.3]
+	at org.apache.jmeter.JMeter.extractAndSetReportOutputFolder(JMeter.java:542) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.JMeter.start(JMeter.java:492) [ApacheJMeter_core.jar:5.6.3]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_401]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_401]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_401]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_401]
+	at org.apache.jmeter.NewDriver.main(NewDriver.java:259) [ApacheJMeter.jar:5.6.3]

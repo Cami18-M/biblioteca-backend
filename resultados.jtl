@@ -1,0 +1,101 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1793069516113,2234,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-1,text,false,"The operation lasted too long: It took 2,234 milliseconds, but should not have lasted longer than 1,000 milliseconds.",1598,0,5,5,http://localhost:5000/api/books,2232,0,0
+1793069516585,1889,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-2,text,false,"The operation lasted too long: It took 1,889 milliseconds, but should not have lasted longer than 1,000 milliseconds.",1598,0,5,5,http://localhost:5000/api/books,1889,0,0
+1793069517085,1539,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-3,text,false,"The operation lasted too long: It took 1,539 milliseconds, but should not have lasted longer than 1,000 milliseconds.",1598,0,6,6,http://localhost:5000/api/books,1539,0,0
+1793069517598,1200,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-4,text,false,"The operation lasted too long: It took 1,200 milliseconds, but should not have lasted longer than 1,000 milliseconds.",1598,0,6,6,http://localhost:5000/api/books,1200,0,0
+1793069518355,806,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-1,text,true,,1598,0,7,7,http://localhost:5000/api/books,806,0,0
+1793069518476,693,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-2,text,true,,1598,0,7,7,http://localhost:5000/api/books,693,0,0
+1793069518625,718,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-3,text,true,,1598,0,7,7,http://localhost:5000/api/books,718,0,0
+1793069518799,548,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-4,text,true,,1598,0,7,7,http://localhost:5000/api/books,548,0,0
+1793069519162,315,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-1,text,true,,1598,0,7,7,http://localhost:5000/api/books,315,0,0
+1793069519092,399,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-7,text,true,,1598,0,7,7,http://localhost:5000/api/books,399,0,0
+1793069519170,428,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-2,text,true,,1598,0,8,8,http://localhost:5000/api/books,428,0,0
+1793069519344,299,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-3,text,true,,1598,0,8,8,http://localhost:5000/api/books,299,0,0
+1793069519348,621,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-4,text,true,,1598,0,8,8,http://localhost:5000/api/books,621,0,0
+1793069519492,480,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-7,text,true,,1598,0,8,8,http://localhost:5000/api/books,480,0,0
+1793069518085,1893,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-5,text,false,"The operation lasted too long: It took 1,893 milliseconds, but should not have lasted longer than 1,000 milliseconds.",1598,0,8,8,http://localhost:5000/api/books,1893,0,0
+1793069519580,520,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-8,text,true,,1598,0,9,9,http://localhost:5000/api/books,520,0,0
+1793069519599,548,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-2,text,true,,1598,0,9,9,http://localhost:5000/api/books,548,0,0
+1793069519644,506,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-3,text,true,,1598,0,9,9,http://localhost:5000/api/books,506,0,0
+1793069519970,458,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-4,text,true,,1598,0,9,9,http://localhost:5000/api/books,458,0,0
+1793069519974,457,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-7,text,true,,1598,0,9,9,http://localhost:5000/api/books,457,0,0
+1793069519979,459,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-5,text,true,,1598,0,9,9,http://localhost:5000/api/books,458,0,0
+1793069520081,477,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-9,text,true,,1598,0,9,9,http://localhost:5000/api/books,477,0,0
+1793069520105,455,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-8,text,true,,1598,0,9,9,http://localhost:5000/api/books,455,0,0
+1793069518582,1997,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-6,text,false,"The operation lasted too long: It took 1,997 milliseconds, but should not have lasted longer than 1,000 milliseconds.",1598,0,9,9,http://localhost:5000/api/books,1997,0,0
+1793069520148,434,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-2,text,true,,1598,0,9,9,http://localhost:5000/api/books,434,0,0
+1793069520429,279,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-4,text,true,,1598,0,10,10,http://localhost:5000/api/books,279,0,0
+1793069520438,277,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-5,text,true,,1598,0,10,10,http://localhost:5000/api/books,277,0,0
+1793069520432,285,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-7,text,true,,1598,0,10,10,http://localhost:5000/api/books,285,0,0
+1793069520559,179,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-9,text,true,,1598,0,10,10,http://localhost:5000/api/books,179,0,0
+1793069520561,280,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-8,text,true,,1598,0,10,10,http://localhost:5000/api/books,280,0,0
+1793069520709,139,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-4,text,true,,1598,0,10,10,http://localhost:5000/api/books,139,0,0
+1793069520581,282,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-6,text,true,,1598,0,10,10,http://localhost:5000/api/books,282,0,0
+1793069520583,282,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-2,text,true,,1598,0,10,10,http://localhost:5000/api/books,282,0,0
+1793069519477,1392,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-1,text,false,"The operation lasted too long: It took 1,392 milliseconds, but should not have lasted longer than 1,000 milliseconds.",1598,0,10,10,http://localhost:5000/api/books,1392,0,0
+1793069520716,155,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-5,text,true,,1598,0,10,10,http://localhost:5000/api/books,155,0,0
+1793069520719,245,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-7,text,true,,1598,0,10,10,http://localhost:5000/api/books,245,0,0
+1793069520739,238,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-9,text,true,,1598,0,10,10,http://localhost:5000/api/books,238,0,0
+1793069520841,183,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-8,text,true,,1598,0,10,10,http://localhost:5000/api/books,183,0,0
+1793069520848,179,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-4,text,true,,1598,0,10,10,http://localhost:5000/api/books,179,0,0
+1793069520866,164,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-2,text,true,,1598,0,10,10,http://localhost:5000/api/books,164,0,0
+1793069520864,168,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-6,text,true,,1598,0,10,10,http://localhost:5000/api/books,168,0,0
+1793069520870,262,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-1,text,true,,1598,0,10,10,http://localhost:5000/api/books,262,0,0
+1793069520872,278,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-5,text,true,,1598,0,10,10,http://localhost:5000/api/books,278,0,0
+1793069520978,232,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-9,text,true,,1598,0,10,10,http://localhost:5000/api/books,232,0,0
+1793069521028,184,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-4,text,true,,1598,0,10,10,http://localhost:5000/api/books,184,0,0
+1793069520965,249,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-7,text,true,,1598,0,10,10,http://localhost:5000/api/books,249,0,0
+1793069521025,191,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-8,text,true,,1598,0,10,10,http://localhost:5000/api/books,191,0,0
+1793069521031,246,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-2,text,true,,1598,0,10,10,http://localhost:5000/api/books,246,0,0
+1793069521033,246,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-6,text,true,,1598,0,10,10,http://localhost:5000/api/books,246,0,0
+1793069520151,1159,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-3,text,false,"The operation lasted too long: It took 1,159 milliseconds, but should not have lasted longer than 1,000 milliseconds.",1598,0,10,10,http://localhost:5000/api/books,1159,0,0
+1793069521277,184,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-2,text,true,,1598,0,10,10,http://localhost:5000/api/books,184,0,0
+1793069521280,185,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-6,text,true,,1598,0,10,10,http://localhost:5000/api/books,185,0,0
+1793069521216,251,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-8,text,true,,1598,0,10,10,http://localhost:5000/api/books,251,0,0
+1793069521212,262,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-4,text,true,,1598,0,10,10,http://localhost:5000/api/books,262,0,0
+1793069521151,326,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-5,text,true,,1598,0,10,10,http://localhost:5000/api/books,326,0,0
+1793069521211,279,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-9,text,true,,1598,0,10,10,http://localhost:5000/api/books,279,0,0
+1793069521214,278,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-7,text,true,,1598,0,10,10,http://localhost:5000/api/books,278,0,0
+1793069521311,287,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-3,text,true,,1598,0,10,10,http://localhost:5000/api/books,287,0,0
+1793069521462,139,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-2,text,true,,1598,0,10,10,http://localhost:5000/api/books,139,0,0
+1793069521466,138,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-6,text,true,,1598,0,9,9,http://localhost:5000/api/books,138,0,0
+1793069521468,142,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-8,text,true,,1598,0,9,9,http://localhost:5000/api/books,142,0,0
+1793069521474,203,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-4,text,true,,1598,0,9,9,http://localhost:5000/api/books,203,0,0
+1793069521478,201,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-5,text,true,,1598,0,8,8,http://localhost:5000/api/books,201,0,0
+1793069521490,194,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-9,text,true,,1598,0,8,8,http://localhost:5000/api/books,194,0,0
+1793069521493,221,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-7,text,true,,1598,0,8,8,http://localhost:5000/api/books,221,0,0
+1793069521599,212,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-3,text,true,,1598,0,8,8,http://localhost:5000/api/books,212,0,0
+1793069521610,203,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-8,text,true,,1598,0,8,8,http://localhost:5000/api/books,203,0,0
+1793069521605,210,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-6,text,true,,1598,0,8,8,http://localhost:5000/api/books,210,0,0
+1793069521680,152,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-5,text,true,,1598,0,8,8,http://localhost:5000/api/books,152,0,0
+1793069520587,1247,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-10,text,false,"The operation lasted too long: It took 1,247 milliseconds, but should not have lasted longer than 1,000 milliseconds.",1598,0,8,8,http://localhost:5000/api/books,1247,0,0
+1793069521684,152,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-9,text,true,,1598,0,8,8,http://localhost:5000/api/books,152,0,0
+1793069521715,140,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-7,text,true,,1598,0,8,8,http://localhost:5000/api/books,140,0,0
+1793069521814,125,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-8,text,true,,1598,0,8,8,http://localhost:5000/api/books,124,0,0
+1793069521816,126,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-6,text,true,,1598,0,8,8,http://localhost:5000/api/books,126,0,0
+1793069521812,148,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-3,text,true,,1598,0,8,8,http://localhost:5000/api/books,148,0,0
+1793069521856,132,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-7,text,true,,1598,0,8,8,http://localhost:5000/api/books,132,0,0
+1793069521833,158,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-5,text,true,,1598,0,7,7,http://localhost:5000/api/books,158,0,0
+1793069521837,156,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-9,text,true,,1598,0,7,7,http://localhost:5000/api/books,156,0,0
+1793069521835,161,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-10,text,true,,1598,0,7,7,http://localhost:5000/api/books,161,0,0
+1793069521132,912,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-1,text,true,,1598,0,7,7,http://localhost:5000/api/books,912,0,0
+1793069521939,135,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-8,text,true,,1598,0,7,7,http://localhost:5000/api/books,135,0,0
+1793069521943,137,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-6,text,true,,1598,0,6,6,http://localhost:5000/api/books,137,0,0
+1793069521961,129,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-3,text,true,,1598,0,6,6,http://localhost:5000/api/books,129,0,0
+1793069521991,135,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-5,text,true,,1598,0,6,6,http://localhost:5000/api/books,135,0,0
+1793069521994,154,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-9,text,true,,1598,0,5,5,http://localhost:5000/api/books,154,0,0
+1793069521996,189,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-10,text,true,,1598,0,5,5,http://localhost:5000/api/books,189,0,0
+1793069522045,142,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-1,text,true,,1598,0,5,5,http://localhost:5000/api/books,142,0,0
+1793069522081,123,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-6,text,true,,1598,0,5,5,http://localhost:5000/api/books,123,0,0
+1793069522090,155,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-3,text,true,,1598,0,4,4,http://localhost:5000/api/books,155,0,0
+1793069522186,135,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-10,text,true,,1598,0,3,3,http://localhost:5000/api/books,135,0,0
+1793069522188,147,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-1,text,true,,1598,0,3,3,http://localhost:5000/api/books,147,0,0
+1793069522321,133,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-10,text,true,,1598,0,3,3,http://localhost:5000/api/books,133,0,0
+1793069522336,214,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-1,text,true,,1598,0,3,3,http://localhost:5000/api/books,214,0,0
+1793069522455,135,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-10,text,true,,1598,0,3,3,http://localhost:5000/api/books,135,0,0
+1793069522551,149,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-1,text,true,,1598,0,3,3,http://localhost:5000/api/books,149,0,0
+1793069522591,124,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-10,text,true,,1598,0,2,2,http://localhost:5000/api/books,124,0,0
+1793069522149,568,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-9,text,true,,1598,0,2,2,http://localhost:5000/api/books,568,0,0
+1793069522716,145,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-10,text,true,,1598,0,1,1,http://localhost:5000/api/books,145,0,0
+1793069522862,150,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-10,text,true,,1598,0,1,1,http://localhost:5000/api/books,150,0,0
+1793069523012,347,GET /api/books,200,OK,Carga Constante - Libros y Auth 1-10,text,true,,1598,0,1,1,http://localhost:5000/api/books,347,0,0

@@ -1,17 +1,44 @@
-name: CI - Biblioteca Backend (Sprint 2)
+name: CI - Biblioteca Backend
 
 on:
   push:
-    branches: [ '**' ]
+    branches: [main]
   pull_request:
-    branches: [ main, '**' ]
+    branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
   test:
+    name: Pruebas (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # El proyecto usa Mongoose 9 / MongoDB Driver 7, que requieren Node >= 20.19
+        node-version: [20.x]
 
     services:
-      # No se usa base de datos externa; los tests usan mongodb-memory-server en memoria
+      mongodb:
+        image: mongo:7.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.runCommand({ ping: 1 }).ok'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      NODE_ENV: test
+      PORT: 5000
+      MONGODB_URI: mongodb://127.0.0.1:27017/biblioteca_test
+      JWT_SECRET: ci_jwt_secret_do_not_use_in_production
+      JWT_EXPIRES_IN: 1d
+      LOAN_PERIOD_DAYS: 14
 
     steps:
       - name: Checkout del repositorio
@@ -20,50 +47,56 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: ${{ matrix.node-version }}
+          cache: npm
 
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Crear archivo .env.test para pruebas
-        run: |
-          cat > .env.test <<EOF
-          PORT=5001
-          NODE_ENV=test
-          MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net/biblioteca_test
-          JWT_SECRET=test_jwt_secret_ci_do_not_use_in_production
-          JWT_EXPIRES_IN=1d
-          LOAN_PERIOD_DAYS=14
-          EOF
-
-      - name: Ejecutar pruebas unitarias e integración (Jest)
+      - name: Ejecutar pruebas unitarias y de integración (Jest)
         run: npm test
 
-      - name: Instalar Newman (colección de Postman)
-        run: npm install -g newman
-
-      - name: Ejecutar colección de Postman con Newman
+      - name: Ejecutar pruebas funcionales con Newman
         run: |
-          npm run dev &
+          npm start > server.log 2>&1 &
           SERVER_PID=$!
-          sleep 5
-          newman run postman/Biblioteca_Backend.postman_collection.json \
-            -e postman/Biblioteca_Backend.postman_environment.json \
-            --reporters cli,html \
-            --reporter-html-export newman-report.html || true
-          kill $SERVER_PID 2>/dev/null || true
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
 
-      - name: Publicar reporte de Newman como artefacto
+          for intento in $(seq 1 30); do
+            if curl --fail --silent http://localhost:5000/api/books > /dev/null; then
+              echo "Servidor disponible en http://localhost:5000"
+              break
+            fi
+            echo "Esperando al servidor... (intento $intento/30)"
+            sleep 2
+          done
+
+          if ! curl --fail --silent http://localhost:5000/api/books > /dev/null; then
+            echo "El servidor no respondió a tiempo"
+            cat server.log
+            exit 1
+          fi
+
+          npm run test:newman -- \
+            --reporters cli,junit \
+            --reporter-junit-export newman-report.xml
+
+      - name: Mostrar log del servidor si falla la ejecución
+        if: failure()
+        run: cat server.log
+
+      - name: Publicar reporte de Newman
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: newman-report
-          path: newman-report.html
+          path: newman-report.xml
+          if-no-files-found: ignore
 
-      - name: Publicar reporte de cobertura de Jest
+      - name: Publicar log del servidor
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: jest-coverage
-          path: coverage/
+          name: server-log
+          path: server.log
+          if-no-files-found: ignore

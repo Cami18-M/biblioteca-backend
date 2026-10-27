@@ -87,6 +87,40 @@ Cuerpo para crear un libro:
 Estados: `active`, `returned`, `overdue` (se marca automáticamente al consultar si venció el plazo).
 Un `admin` puede prestar a nombre de otro usuario enviando `user` en el cuerpo.
 
+## Pruebas
+
+### Unitarias e integración (Jest + Supertest)
+
+```bash
+npm test          # ejecuta todas las suites de tests/ con NODE_ENV=test
+npm run test:watch
+```
+
+Las suites viven en `tests/unit/` y `tests/integration/`. Las de integración usan
+Supertest contra la app de Express y mocks de los modelos, por lo que no
+necesitan una base de datos real.
+
+### Funcionales (Newman)
+
+Con el servidor levantado (`npm run dev` o `npm start`):
+
+```bash
+npm run test:newman
+```
+
+La colección y el entorno están en `postman/`. Para un reporte JUnit adicional:
+
+```bash
+npm run test:newman -- --reporters cli,junit --reporter-junit-export newman-report.xml
+```
+
+### Integración continua
+
+El workflow `.github/workflows/ci.yml` se ejecuta en cada `push` y
+`pull_request` sobre `main`. Levanta un servicio MongoDB 7, instala las
+dependencias con `npm ci`, ejecuta Jest y después Newman contra el servidor
+local, publicando el reporte JUnit como artefacto.
+
 ## Estructura
 
 ```

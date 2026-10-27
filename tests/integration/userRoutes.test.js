@@ -93,12 +93,14 @@ describe('Integration - userRoutes', () => {
 
   describe('PUT /api/users/:id', () => {
     test('debe actualizar un usuario (200)', async () => {
-      User.findByIdAndUpdate.mockResolvedValue({
-        _id: '507f1f77bcf86cd799439011',
-        name: 'Actualizado',
-        email: 'antiguo@example.com',
-        password: undefined
-      });
+      User.findByIdAndUpdate.mockReturnValue(
+        createMockQuery({
+          _id: '507f1f77bcf86cd799439011',
+          name: 'Actualizado',
+          email: 'antiguo@example.com',
+          password: undefined
+        })
+      );
       const res = await request(app)
         .put('/api/users/507f1f77bcf86cd799439011')
         .send({ name: 'Actualizado' });
@@ -106,8 +108,10 @@ describe('Integration - userRoutes', () => {
       expect(res.body.data.name).toBe('Actualizado');
     });
 
-    test('debe devolver 404 si no existe', async () => {
-      User.findByIdAndUpdate.mockResolvedValue(null);
+    test('devolver 404 si no existe', async () => {
+      User.findByIdAndUpdate.mockReturnValue(
+        createMockQuery(null)
+      );
       const res = await request(app)
         .put('/api/users/000000000000000000000000')
         .send({ name: 'X' });

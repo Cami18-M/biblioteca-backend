@@ -146,7 +146,6 @@ describe('Integration - transactionRoutes', () => {
         book: '507f1f77bcf86cd799439012'
       };
       Transaction.findOneAndUpdate.mockResolvedValue(returnedTx);
-      Transaction.findOneAndUpdate.returned = returnedTx;
       Book.findByIdAndUpdate.mockResolvedValue({});
 
       const res = await request(app)

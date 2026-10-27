@@ -160,10 +160,12 @@ const returnBook = async (id, actor = {}) => {
 
   await Book.findByIdAndUpdate(returned.book, { $inc: { stock: 1 } });
 
-  return await returned.populate([
-    { path: 'user', select: USER_FIELDS },
-    { path: 'book', select: BOOK_FIELDS }
-  ]);
+  return returned.populate
+    ? await returned.populate([
+        { path: 'user', select: USER_FIELDS },
+        { path: 'book', select: BOOK_FIELDS }
+      ])
+    : returned;
 };
 
 /**

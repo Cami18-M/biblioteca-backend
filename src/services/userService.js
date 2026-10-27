@@ -1,5 +1,14 @@
 const User = require('../models/userModel');
 
+/**
+ * Crea un error con código HTTP para que lo maneje errorMiddleware.
+ */
+const createError = (message, statusCode) => {
+  const error = new Error(message);
+  error.statusCode = statusCode;
+  return error;
+};
+
 // Servicios de usuario - Lógica de negocio
 
 /**
@@ -8,6 +17,10 @@ const User = require('../models/userModel');
  * @returns {Promise<Object>} Usuario creado
  */
 const createUser = async (userData) => {
+  if (!userData.name || !userData.email || !userData.password) {
+    throw createError('El nombre, correo electrónico y contraseña son obligatorios', 400);
+  }
+  
   const user = new User(userData);
   return await user.save();
 };

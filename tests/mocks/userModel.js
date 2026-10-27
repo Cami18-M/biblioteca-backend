@@ -13,12 +13,15 @@ function UserMock(data = {}) {
     updatedAt: new Date(),
     save: jest.fn().mockResolvedValue(this),
     comparePassword: jest.fn().mockResolvedValue(true),
-    toJSON: jest.fn().mockReturnValue({
-      _id: this._id.toString(),
-      name: this.name,
-      email: this.email,
-      role: this.role
-    })
+    toJSON: function() {
+      const safeId = this._id ? this._id.toString() : String(this._id || _id());
+      return {
+        _id: safeId,
+        name: this.name,
+        email: this.email,
+        role: this.role
+      }
+    }
   });
   return this;
 }
